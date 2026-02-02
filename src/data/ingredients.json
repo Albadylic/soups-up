@@ -1,0 +1,20 @@
+{
+  "fats": [
+    { "id": "vegan-butter", "name": "Butter", "emoji": "🧈" },
+    { "id": "oil", "name": "Oil", "emoji": "🫒" }
+  ],
+  "vegetables": [
+    { "id": "onions", "name": "Onion", "emoji": "🧅" },
+    { "id": "carrots", "name": "Carrot", "emoji": "🥕" },
+    { "id": "mushrooms", "name": "Mushroom", "emoji": "🍄" },
+    { "id": "garlic", "name": "Garlic", "emoji": "🧄" },
+    { "id": "tomato", "name": "Tomato", "emoji": "🍅" },
+    { "id": "cabbage", "name": "Cabbage", "emoji": "🥬" },
+    { "id": "potato", "name": "Potato", "emoji": "🥔" }
+  ],
+  "stocks": [
+    { "id": "vegetable", "name": "Vegetable Stock", "emoji": "🍲" },
+    { "id": "mushroom", "name": "Mushroom Stock", "emoji": "🍄" },
+    { "id": "seaweed", "name": "Seaweed Stock", "emoji": "🌊" }
+  ]
+}

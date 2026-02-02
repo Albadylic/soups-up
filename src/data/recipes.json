@@ -1,0 +1,107 @@
+[
+  {
+    "id": "french-onion",
+    "name": "French Onion Soup",
+    "fat": "vegan-butter",
+    "vegetables": ["onions"],
+    "stock": "vegetable"
+  },
+  {
+    "id": "cream-of-mushroom",
+    "name": "Cream of Mushroom",
+    "fat": "vegan-butter",
+    "vegetables": ["onions", "mushrooms"],
+    "stock": "mushroom"
+  },
+  {
+    "id": "garlic-potato",
+    "name": "Garlic Potato Soup",
+    "fat": "vegan-butter",
+    "vegetables": ["garlic", "potato"],
+    "stock": "vegetable"
+  },
+  {
+    "id": "carrot-ginger",
+    "name": "Carrot Ginger Soup",
+    "fat": "oil",
+    "vegetables": ["carrots", "onions"],
+    "stock": "vegetable"
+  },
+  {
+    "id": "minestrone",
+    "name": "Minestrone",
+    "fat": "oil",
+    "vegetables": ["onions", "carrots", "cabbage"],
+    "stock": "vegetable"
+  },
+  {
+    "id": "wild-mushroom",
+    "name": "Wild Mushroom Soup",
+    "fat": "vegan-butter",
+    "vegetables": ["mushrooms", "garlic"],
+    "stock": "mushroom"
+  },
+  {
+    "id": "tom-yum",
+    "name": "Tom Yum",
+    "fat": "oil",
+    "vegetables": ["tomato", "mushrooms", "garlic"],
+    "stock": "seaweed"
+  },
+  {
+    "id": "cabbage-soup",
+    "name": "Cabbage Soup",
+    "fat": "oil",
+    "vegetables": ["cabbage", "onions", "carrots"],
+    "stock": "vegetable"
+  },
+  {
+    "id": "creamy-potato-garlic",
+    "name": "Creamy Potato Garlic",
+    "fat": "vegan-butter",
+    "vegetables": ["potato", "garlic", "onions"],
+    "stock": "vegetable"
+  },
+  {
+    "id": "miso-mushroom",
+    "name": "Miso Mushroom Soup",
+    "fat": "oil",
+    "vegetables": ["mushrooms", "cabbage"],
+    "stock": "seaweed"
+  },
+  {
+    "id": "root-vegetable",
+    "name": "Root Vegetable Soup",
+    "fat": "vegan-butter",
+    "vegetables": ["carrots", "potato"],
+    "stock": "vegetable"
+  },
+  {
+    "id": "seaweed-onion",
+    "name": "Seaweed Onion Broth",
+    "fat": "oil",
+    "vegetables": ["onions"],
+    "stock": "seaweed"
+  },
+  {
+    "id": "hearty-mushroom",
+    "name": "Hearty Mushroom Stew",
+    "fat": "vegan-butter",
+    "vegetables": ["mushrooms", "potato", "onions"],
+    "stock": "mushroom"
+  },
+  {
+    "id": "garden-vegetable",
+    "name": "Garden Vegetable Soup",
+    "fat": "oil",
+    "vegetables": ["onions", "carrots", "garlic"],
+    "stock": "vegetable"
+  },
+  {
+    "id": "tomato-carrot",
+    "name": "Tomato & Carrot Soup",
+    "fat": "vegan-butter",
+    "vegetables": ["tomato", "carrots"],
+    "stock": "vegetable"
+  }
+]
