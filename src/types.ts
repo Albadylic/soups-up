@@ -25,6 +25,7 @@ export interface GameState {
   addedStock: string | null;
   showRecipeModal: boolean;
   feedback: 'success' | 'failure' | null;
+  readyForStock: boolean;
 }
 
 export type IngredientType = 'fat' | 'vegetable' | 'stock';

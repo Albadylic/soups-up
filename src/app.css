@@ -3,9 +3,10 @@
   height: 100vh;
 }
 
+/* Desktop Layout */
 .game-container {
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 220px 1fr;
   grid-template-rows: auto 1fr;
   grid-template-areas:
     "sidebar order"
@@ -14,55 +15,67 @@
   gap: 0;
 }
 
+/* Hide mobile elements on desktop */
+.mobile-header,
+.mobile-pot-area,
+.mobile-ingredients {
+  display: none;
+}
+
 /* Order area (top-middle) */
 .order-area {
   grid-area: order;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem 1.5rem;
+  padding: 1.5rem 2rem;
   background-color: var(--bg-secondary);
   border-bottom: 2px solid var(--accent-brown);
 }
 
 .order-display {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
 }
 
-.order-display span {
-  color: var(--accent-brown);
+.order-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
-.recipe-book-icon {
+.order-name {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #D4A017;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Recipe book button */
+.recipe-book-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 0.25rem 0.5rem;
+  border: 2px solid var(--accent-brown);
+  padding: 0.5rem 1rem;
   border-radius: 8px;
+  cursor: pointer;
   transition: background-color 0.2s;
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
 }
 
-.recipe-book-icon:hover {
+.recipe-book-btn:hover {
   background-color: var(--accent-yellow);
 }
 
-/* Sidebar header */
-.sidebar-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--accent-brown);
-}
-
-.sidebar-header h2 {
-  font-size: 1.1rem;
-  color: var(--accent-brown);
-  margin: 0;
+.recipe-book-btn .recipe-book-icon {
+  font-size: 1.25rem;
 }
 
 /* Sidebar */
@@ -530,5 +543,255 @@
   100% {
     transform: scale(1);
     opacity: 1;
+  }
+}
+
+/* ==================== */
+/* Mobile Layout        */
+/* ==================== */
+@media (max-width: 768px) {
+  .game-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Hide desktop elements */
+  .sidebar,
+  .order-area,
+  .cooking-area {
+    display: none;
+  }
+
+  /* Show mobile elements */
+  .mobile-header,
+  .mobile-pot-area,
+  .mobile-ingredients {
+    display: flex;
+  }
+
+  /* Mobile Header */
+  .mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background-color: var(--bg-secondary);
+    border-bottom: 2px solid var(--accent-brown);
+    position: relative;
+  }
+
+  .mobile-recipe-btn {
+    position: absolute;
+    left: 1rem;
+    background: none;
+    border: 2px solid var(--accent-brown);
+    border-radius: 8px;
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .mobile-recipe-btn:hover {
+    background-color: var(--accent-yellow);
+  }
+
+  .mobile-header .order-display {
+    text-align: center;
+  }
+
+  .mobile-header .order-name {
+    font-size: 1.5rem;
+  }
+
+  /* Mobile Pot Area */
+  .mobile-pot-area {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .mobile-pot-area .cooking-area {
+    display: flex;
+    padding: 1rem;
+  }
+
+  .mobile-pot-area .cooking-progress {
+    display: none;
+  }
+
+  .mobile-pot-area .pot-wrapper {
+    padding-top: 30px;
+  }
+
+  .mobile-pot-area .pot {
+    width: 180px;
+    height: 180px;
+  }
+
+  .mobile-pot-area .pot-rim {
+    width: 160px;
+    height: 16px;
+  }
+
+  .mobile-pot-area .pot-body {
+    width: 160px;
+    height: 140px;
+  }
+
+  .mobile-pot-area .pot-handle {
+    width: 24px;
+    height: 32px;
+    border-width: 5px;
+    top: 40px;
+  }
+
+  .mobile-pot-area .pot-handle-left {
+    left: -14px;
+  }
+
+  .mobile-pot-area .pot-handle-right {
+    right: -14px;
+  }
+
+  .mobile-pot-area .pot-soup {
+    bottom: 45px;
+  }
+
+  .mobile-pot-area .pot-face {
+    bottom: 20px;
+  }
+
+  .mobile-pot-area .pot-contents {
+    font-size: 0.7rem;
+  }
+
+  /* Mobile Ingredients */
+  .mobile-ingredients {
+    flex-direction: column;
+    background-color: var(--bg-secondary);
+    border-top: 2px solid var(--accent-brown);
+    padding: 1rem;
+    max-height: 45vh;
+    overflow-y: auto;
+  }
+
+  .mobile-ingredient-section {
+    margin-bottom: 1rem;
+  }
+
+  .mobile-ingredient-section h3 {
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+    text-align: center;
+  }
+
+  .mobile-ingredient-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 0.75rem;
+    justify-items: center;
+  }
+
+  .mobile-ingredient-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background-color: var(--bg-primary);
+    border: 2px solid var(--accent-brown);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .mobile-ingredient-btn:hover {
+    background-color: var(--accent-yellow);
+  }
+
+  .mobile-ingredient-btn.selected {
+    background-color: var(--accent-yellow);
+    border-color: var(--success);
+    box-shadow: 0 0 0 2px var(--success);
+  }
+
+  .mobile-ingredient-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .mobile-ingredient-btn .ingredient-emoji {
+    font-size: 2rem;
+    line-height: 1;
+  }
+
+  .mobile-ingredient-btn .ingredient-name {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+    text-align: center;
+  }
+
+  .next-step-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1rem auto 0;
+    padding: 0.75rem 2rem;
+    background-color: var(--accent-yellow);
+    border: 2px solid var(--accent-brown);
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .next-step-btn:hover {
+    background-color: #E8D078;
+  }
+
+  .next-step-btn .arrow {
+    font-size: 1.25rem;
+  }
+
+  .mobile-action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--accent-brown);
+  }
+
+  .mobile-action-buttons .submit-btn,
+  .mobile-action-buttons .reset-btn {
+    flex: 1;
+    padding: 1rem;
+    font-size: 1.1rem;
+    border-radius: 12px;
+  }
+
+  .mobile-action-buttons .reset-btn {
+    margin-top: 0;
+  }
+
+  /* Modal adjustments for mobile */
+  .modal {
+    margin: 1rem;
+    max-height: 90vh;
+  }
+
+  .feedback-message {
+    padding: 1.5rem 2.5rem;
+    font-size: 1.5rem;
   }
 }

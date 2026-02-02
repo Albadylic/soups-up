@@ -28,12 +28,10 @@ export function Sidebar({
 
   return (
     <aside class="sidebar">
-      <div class="sidebar-header">
-        <h2>Ingredients</h2>
-        <button class="recipe-book-icon" onClick={onToggleRecipeModal} title="Recipe Book">
-          📖
-        </button>
-      </div>
+      <button class="recipe-book-btn" onClick={onToggleRecipeModal}>
+        <span class="recipe-book-icon">📖</span>
+        <span>Recipes</span>
+      </button>
 
       <div class="sidebar-section">
         <h3>Fats</h3>

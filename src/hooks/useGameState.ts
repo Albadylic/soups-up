@@ -15,6 +15,7 @@ export function useGameState() {
     addedStock: null,
     showRecipeModal: false,
     feedback: null,
+    readyForStock: false,
   });
 
   // Initialize with a random order
@@ -58,6 +59,14 @@ export function useGameState() {
       addedFat: null,
       addedVegetables: [],
       addedStock: null,
+      readyForStock: false,
+    }));
+  }, []);
+
+  const goToStockStep = useCallback(() => {
+    setState(prev => ({
+      ...prev,
+      readyForStock: true,
     }));
   }, []);
 
@@ -74,10 +83,10 @@ export function useGameState() {
         return { ...prev, feedback: 'failure' };
       }
 
-      // Check vegetables match (order matters in this implementation)
+      // Check vegetables match (order doesn't matter)
       const veggiesMatch =
         prev.addedVegetables.length === order.vegetables.length &&
-        prev.addedVegetables.every((v, i) => v === order.vegetables[i]);
+        prev.addedVegetables.every(v => order.vegetables.includes(v));
 
       if (!veggiesMatch) {
         return { ...prev, feedback: 'failure' };
@@ -100,11 +109,19 @@ export function useGameState() {
       addedVegetables: [],
       addedStock: null,
       feedback: null,
+      readyForStock: false,
     }));
   }, []);
 
   const clearFeedback = useCallback(() => {
-    setState(prev => ({ ...prev, feedback: null }));
+    setState(prev => ({
+      ...prev,
+      feedback: null,
+      addedFat: null,
+      addedVegetables: [],
+      addedStock: null,
+      readyForStock: false,
+    }));
   }, []);
 
   const toggleRecipeModal = useCallback(() => {
@@ -118,7 +135,7 @@ export function useGameState() {
 
   const currentStep = (): 'fat' | 'vegetable' | 'stock' | 'ready' => {
     if (!state.addedFat) return 'fat';
-    if (state.addedVegetables.length === 0 || (!state.addedStock && state.addedVegetables.length < 3)) return 'vegetable';
+    if (state.addedVegetables.length === 0 || (!state.addedStock && state.addedVegetables.length < 3 && !state.readyForStock)) return 'vegetable';
     if (!state.addedStock) return 'stock';
     return 'ready';
   };
@@ -131,6 +148,7 @@ export function useGameState() {
     nextOrder,
     clearFeedback,
     toggleRecipeModal,
+    goToStockStep,
     canSubmit,
     currentStep: currentStep(),
   };

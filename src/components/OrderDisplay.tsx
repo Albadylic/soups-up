@@ -7,7 +7,8 @@ interface OrderDisplayProps {
 export function OrderDisplay({ order }: OrderDisplayProps) {
   return (
     <div class="order-display">
-      Order: <span>{order ? order.name : 'Loading...'}</span>
+      <span class="order-label">Order:</span>
+      <span class="order-name">{order ? order.name : "Loading..."}</span>
     </div>
   );
 }

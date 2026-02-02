@@ -1,9 +1,10 @@
-import { useGameState } from '../hooks/useGameState';
-import { OrderDisplay } from './OrderDisplay';
-import { RecipeModal } from './RecipeModal';
-import { Sidebar } from './Sidebar';
-import { CookingArea } from './CookingArea';
-import { FeedbackMessage } from './FeedbackMessage';
+import { useGameState } from "../hooks/useGameState";
+import { OrderDisplay } from "./OrderDisplay";
+import { RecipeModal } from "./RecipeModal";
+import { Sidebar } from "./Sidebar";
+import { CookingArea } from "./CookingArea";
+import { MobileIngredients } from "./MobileIngredients";
+import { FeedbackMessage } from "./FeedbackMessage";
 
 export function Game() {
   const {
@@ -19,12 +20,14 @@ export function Game() {
     nextOrder,
     clearFeedback,
     toggleRecipeModal,
+    goToStockStep,
     canSubmit,
     currentStep,
   } = useGameState();
 
   return (
     <div class="game-container">
+      {/* Desktop Layout */}
       <Sidebar
         addedFat={addedFat}
         addedVegetables={addedVegetables}
@@ -44,6 +47,43 @@ export function Game() {
         addedVegetables={addedVegetables}
         addedStock={addedStock}
         currentStep={currentStep}
+        canSubmit={canSubmit}
+        onSubmit={checkSoup}
+        onReset={resetSoup}
+      />
+
+      {/* Mobile Layout */}
+      <header class="mobile-header">
+        <button
+          class="mobile-recipe-btn"
+          onClick={toggleRecipeModal}
+          title="Recipe Book"
+        >
+          📖
+        </button>
+        <OrderDisplay order={currentOrder} />
+      </header>
+
+      <div class="mobile-pot-area">
+        <CookingArea
+          addedFat={addedFat}
+          addedVegetables={addedVegetables}
+          addedStock={addedStock}
+          currentStep={currentStep}
+          canSubmit={canSubmit}
+          onSubmit={checkSoup}
+          onReset={resetSoup}
+          hideButtons
+        />
+      </div>
+
+      <MobileIngredients
+        addedFat={addedFat}
+        addedVegetables={addedVegetables}
+        addedStock={addedStock}
+        currentStep={currentStep}
+        onAddIngredient={addIngredient}
+        onNextStep={goToStockStep}
         canSubmit={canSubmit}
         onSubmit={checkSoup}
         onReset={resetSoup}

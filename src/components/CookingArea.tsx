@@ -1,20 +1,24 @@
-import type { Ingredients } from '../types';
-import ingredientsData from '../data/ingredients.json';
+import type { Ingredients } from "../types";
+import ingredientsData from "../data/ingredients.json";
 
 interface CookingAreaProps {
   addedFat: string | null;
   addedVegetables: string[];
   addedStock: string | null;
-  currentStep: 'fat' | 'vegetable' | 'stock' | 'ready';
+  currentStep: "fat" | "vegetable" | "stock" | "ready";
   canSubmit: boolean;
   onSubmit: () => void;
   onReset: () => void;
+  hideButtons?: boolean;
 }
 
 const ingredients = ingredientsData as Ingredients;
 
-const getIngredientDisplay = (id: string, category: 'fats' | 'vegetables' | 'stocks'): string => {
-  const item = ingredients[category].find(i => i.id === id);
+const getIngredientDisplay = (
+  id: string,
+  category: "fats" | "vegetables" | "stocks",
+): string => {
+  const item = ingredients[category].find((i) => i.id === id);
   return item ? `${item.emoji} ${item.name}` : id;
 };
 
@@ -26,6 +30,7 @@ export function CookingArea({
   canSubmit,
   onSubmit,
   onReset,
+  hideButtons = false,
 }: CookingAreaProps) {
   const hasIngredients = addedFat || addedVegetables.length > 0 || addedStock;
 
@@ -33,15 +38,21 @@ export function CookingArea({
     <main class="cooking-area">
       <div class="pot-container">
         <div class="cooking-progress">
-          <span class={`progress-step ${currentStep === 'fat' ? 'active' : addedFat ? 'completed' : ''}`}>
+          <span
+            class={`progress-step ${currentStep === "fat" ? "active" : addedFat ? "completed" : ""}`}
+          >
             Fat
           </span>
           <span class="progress-arrow">→</span>
-          <span class={`progress-step ${currentStep === 'vegetable' ? 'active' : addedVegetables.length > 0 && addedStock ? 'completed' : ''}`}>
+          <span
+            class={`progress-step ${currentStep === "vegetable" ? "active" : addedVegetables.length > 0 && addedStock ? "completed" : ""}`}
+          >
             Vegetables
           </span>
           <span class="progress-arrow">→</span>
-          <span class={`progress-step ${currentStep === 'stock' ? 'active' : addedStock ? 'completed' : ''}`}>
+          <span
+            class={`progress-step ${currentStep === "stock" ? "active" : addedStock ? "completed" : ""}`}
+          >
             Stock
           </span>
         </div>
@@ -63,11 +74,15 @@ export function CookingArea({
                     <p class="empty">Add ingredients!</p>
                   ) : (
                     <>
-                      {addedFat && <p>{getIngredientDisplay(addedFat, 'fats')}</p>}
-                      {addedVegetables.map(v => (
-                        <p key={v}>{getIngredientDisplay(v, 'vegetables')}</p>
+                      {addedFat && (
+                        <p>{getIngredientDisplay(addedFat, "fats")}</p>
+                      )}
+                      {addedVegetables.map((v) => (
+                        <p key={v}>{getIngredientDisplay(v, "vegetables")}</p>
                       ))}
-                      {addedStock && <p>{getIngredientDisplay(addedStock, 'stocks')}</p>}
+                      {addedStock && (
+                        <p>{getIngredientDisplay(addedStock, "stocks")}</p>
+                      )}
                     </>
                   )}
                 </div>
@@ -85,14 +100,16 @@ export function CookingArea({
           </div>
         </div>
 
-        <div class="action-buttons">
-          <button class="submit-btn" onClick={onSubmit} disabled={!canSubmit}>
-            Submit Soup
-          </button>
-          <button class="reset-btn" onClick={onReset}>
-            Reset
-          </button>
-        </div>
+        {!hideButtons && (
+          <div class="action-buttons">
+            <button class="submit-btn" onClick={onSubmit} disabled={!canSubmit}>
+              Serve
+            </button>
+            <button class="reset-btn" onClick={onReset}>
+              Reset
+            </button>
+          </div>
+        )}
       </div>
     </main>
   );
