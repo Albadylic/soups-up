@@ -16,6 +16,7 @@ export function useGameState() {
     showRecipeModal: false,
     feedback: null,
     readyForStock: false,
+    pinnedRecipeId: null,
   });
 
   // Initialize with a random order
@@ -131,6 +132,13 @@ export function useGameState() {
     }));
   }, []);
 
+  const pinRecipe = useCallback((recipeId: string) => {
+    setState(prev => ({
+      ...prev,
+      pinnedRecipeId: prev.pinnedRecipeId === recipeId ? null : recipeId,
+    }));
+  }, []);
+
   const canSubmit = Boolean(state.addedFat && state.addedVegetables.length > 0 && state.addedStock);
 
   const currentStep = (): 'fat' | 'vegetable' | 'stock' | 'ready' => {
@@ -149,6 +157,7 @@ export function useGameState() {
     clearFeedback,
     toggleRecipeModal,
     goToStockStep,
+    pinRecipe,
     canSubmit,
     currentStep: currentStep(),
   };

@@ -54,6 +54,29 @@
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
+/* Pinned recipe display */
+.pinned-ingredients {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed var(--accent-brown);
+}
+
+.pinned-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.pinned-recipe-content {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
 /* Recipe book button */
 .recipe-book-btn {
   display: flex;
@@ -487,10 +510,44 @@
   border: 1px solid var(--accent-brown);
 }
 
+.recipe-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
 .recipe-item h3 {
   font-size: 1.1rem;
   color: var(--accent-brown);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
+}
+
+.pin-btn {
+  background: none;
+  border: 1px solid var(--accent-brown);
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: all 0.2s;
+}
+
+.pin-btn:hover {
+  opacity: 1;
+  background-color: var(--accent-yellow);
+}
+
+.pin-btn.pinned {
+  opacity: 1;
+  background-color: var(--accent-yellow);
+  border-color: var(--success);
+}
+
+.recipe-item.pinned {
+  border-color: var(--success);
+  box-shadow: 0 0 0 2px var(--success);
 }
 
 .recipe-ingredients {

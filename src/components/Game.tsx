@@ -14,6 +14,7 @@ export function Game() {
     addedStock,
     showRecipeModal,
     feedback,
+    pinnedRecipeId,
     addIngredient,
     resetSoup,
     checkSoup,
@@ -21,6 +22,7 @@ export function Game() {
     clearFeedback,
     toggleRecipeModal,
     goToStockStep,
+    pinRecipe,
     canSubmit,
     currentStep,
   } = useGameState();
@@ -39,7 +41,7 @@ export function Game() {
       />
 
       <div class="order-area">
-        <OrderDisplay order={currentOrder} />
+        <OrderDisplay order={currentOrder} pinnedRecipeId={pinnedRecipeId} />
       </div>
 
       <CookingArea
@@ -61,7 +63,7 @@ export function Game() {
         >
           📖
         </button>
-        <OrderDisplay order={currentOrder} />
+        <OrderDisplay order={currentOrder} pinnedRecipeId={pinnedRecipeId} />
       </header>
 
       <div class="mobile-pot-area">
@@ -89,7 +91,13 @@ export function Game() {
         onReset={resetSoup}
       />
 
-      {showRecipeModal && <RecipeModal onClose={toggleRecipeModal} />}
+      {showRecipeModal && (
+        <RecipeModal
+          onClose={toggleRecipeModal}
+          pinnedRecipeId={pinnedRecipeId}
+          onPinRecipe={pinRecipe}
+        />
+      )}
 
       {feedback && (
         <FeedbackMessage
