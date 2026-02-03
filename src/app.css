@@ -697,10 +697,6 @@
   bottom: 5px;
 }
 
-.mobile-pot-area .pot-contents {
-  font-size: 0.7rem;
-}
-
 .mobile-reset-btn {
   margin-top: 0.5rem;
   padding: 0.5rem 1.5rem;
@@ -724,7 +720,7 @@
   flex-direction: column;
   background-color: var(--bg-secondary);
   border-top: 2px solid var(--accent-brown);
-  padding: 1rem;
+  padding: 0.5rem;
   max-height: 45vh;
   overflow-y: auto;
 }
@@ -752,8 +748,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   background-color: var(--bg-primary);
   border: 2px solid var(--accent-brown);
   border-radius: 12px;
