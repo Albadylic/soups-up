@@ -25,6 +25,7 @@ export interface GameState {
   addedStock: string | null;
   showRecipeModal: boolean;
   feedback: 'success' | 'failure' | null;
+  readyForVegetables: boolean;
   readyForStock: boolean;
   pinnedRecipeId: string | null;
 }

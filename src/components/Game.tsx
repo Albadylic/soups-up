@@ -1,7 +1,6 @@
 import { useGameState } from "../hooks/useGameState";
 import { OrderDisplay } from "./OrderDisplay";
 import { RecipeModal } from "./RecipeModal";
-import { Sidebar } from "./Sidebar";
 import { CookingArea } from "./CookingArea";
 import { MobileIngredients } from "./MobileIngredients";
 import { FeedbackMessage } from "./FeedbackMessage";
@@ -16,11 +15,13 @@ export function Game() {
     feedback,
     pinnedRecipeId,
     addIngredient,
+    removeIngredient,
     resetSoup,
     checkSoup,
     nextOrder,
     clearFeedback,
     toggleRecipeModal,
+    goToVegetableStep,
     goToStockStep,
     pinRecipe,
     canSubmit,
@@ -29,32 +30,6 @@ export function Game() {
 
   return (
     <div class="game-container">
-      {/* Desktop Layout */}
-      <Sidebar
-        addedFat={addedFat}
-        addedVegetables={addedVegetables}
-        addedStock={addedStock}
-        currentStep={currentStep}
-        onAddIngredient={addIngredient}
-        onReset={resetSoup}
-        onToggleRecipeModal={toggleRecipeModal}
-      />
-
-      <div class="order-area">
-        <OrderDisplay order={currentOrder} pinnedRecipeId={pinnedRecipeId} />
-      </div>
-
-      <CookingArea
-        addedFat={addedFat}
-        addedVegetables={addedVegetables}
-        addedStock={addedStock}
-        currentStep={currentStep}
-        canSubmit={canSubmit}
-        onSubmit={checkSoup}
-        onReset={resetSoup}
-      />
-
-      {/* Mobile Layout */}
       <header class="mobile-header">
         <button
           class="mobile-recipe-btn"
@@ -77,6 +52,9 @@ export function Game() {
           onReset={resetSoup}
           hideButtons
         />
+        <button class="mobile-reset-btn" onClick={resetSoup}>
+          Reset
+        </button>
       </div>
 
       <MobileIngredients
@@ -85,10 +63,10 @@ export function Game() {
         addedStock={addedStock}
         currentStep={currentStep}
         onAddIngredient={addIngredient}
-        onNextStep={goToStockStep}
-        canSubmit={canSubmit}
+        onRemoveIngredient={removeIngredient}
+        onGoToVegetables={goToVegetableStep}
+        onGoToStock={goToStockStep}
         onSubmit={checkSoup}
-        onReset={resetSoup}
       />
 
       {showRecipeModal && (

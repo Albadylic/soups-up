@@ -15,6 +15,7 @@ export function useGameState() {
     addedStock: null,
     showRecipeModal: false,
     feedback: null,
+    readyForVegetables: false,
     readyForStock: false,
     pinnedRecipeId: null,
   });
@@ -31,7 +32,7 @@ export function useGameState() {
     setState(prev => {
       // Enforce order: fat first, then vegetables, then stock
       if (type === 'fat') {
-        if (prev.addedFat) return prev; // Already have fat
+        // Allow swapping fat (replaces existing selection)
         return { ...prev, addedFat: id };
       }
 
@@ -46,8 +47,41 @@ export function useGameState() {
       if (type === 'stock') {
         if (!prev.addedFat) return prev; // Need fat first
         if (prev.addedVegetables.length === 0) return prev; // Need at least 1 vegetable
-        if (prev.addedStock) return prev; // Already have stock
+        // Allow swapping stock
         return { ...prev, addedStock: id };
+      }
+
+      return prev;
+    });
+  }, []);
+
+  const removeIngredient = useCallback((type: IngredientType, id: string) => {
+    setState(prev => {
+      if (type === 'fat' && prev.addedFat === id) {
+        // Removing fat clears everything since vegetables and stock depend on it
+        return {
+          ...prev,
+          addedFat: null,
+          addedVegetables: [],
+          addedStock: null,
+          readyForVegetables: false,
+          readyForStock: false,
+        };
+      }
+
+      if (type === 'vegetable' && prev.addedVegetables.includes(id)) {
+        const newVegetables = prev.addedVegetables.filter(v => v !== id);
+        return {
+          ...prev,
+          addedVegetables: newVegetables,
+          // If no vegetables left, also clear stock and reset ready states
+          addedStock: newVegetables.length === 0 ? null : prev.addedStock,
+          readyForStock: newVegetables.length === 0 ? false : prev.readyForStock,
+        };
+      }
+
+      if (type === 'stock' && prev.addedStock === id) {
+        return { ...prev, addedStock: null };
       }
 
       return prev;
@@ -60,7 +94,15 @@ export function useGameState() {
       addedFat: null,
       addedVegetables: [],
       addedStock: null,
+      readyForVegetables: false,
       readyForStock: false,
+    }));
+  }, []);
+
+  const goToVegetableStep = useCallback(() => {
+    setState(prev => ({
+      ...prev,
+      readyForVegetables: true,
     }));
   }, []);
 
@@ -98,7 +140,7 @@ export function useGameState() {
         return { ...prev, feedback: 'failure' };
       }
 
-      return { ...prev, feedback: 'success' };
+      return { ...prev, feedback: 'success', pinnedRecipeId: null };
     });
   }, []);
 
@@ -110,6 +152,7 @@ export function useGameState() {
       addedVegetables: [],
       addedStock: null,
       feedback: null,
+      readyForVegetables: false,
       readyForStock: false,
     }));
   }, []);
@@ -121,6 +164,7 @@ export function useGameState() {
       addedFat: null,
       addedVegetables: [],
       addedStock: null,
+      readyForVegetables: false,
       readyForStock: false,
     }));
   }, []);
@@ -136,26 +180,28 @@ export function useGameState() {
     setState(prev => ({
       ...prev,
       pinnedRecipeId: prev.pinnedRecipeId === recipeId ? null : recipeId,
+      showRecipeModal: false,
     }));
   }, []);
 
   const canSubmit = Boolean(state.addedFat && state.addedVegetables.length > 0 && state.addedStock);
 
-  const currentStep = (): 'fat' | 'vegetable' | 'stock' | 'ready' => {
-    if (!state.addedFat) return 'fat';
-    if (state.addedVegetables.length === 0 || (!state.addedStock && state.addedVegetables.length < 3 && !state.readyForStock)) return 'vegetable';
-    if (!state.addedStock) return 'stock';
-    return 'ready';
+  const currentStep = (): 'fat' | 'vegetable' | 'stock' => {
+    if (!state.readyForVegetables) return 'fat';
+    if (!state.readyForStock) return 'vegetable';
+    return 'stock';
   };
 
   return {
     ...state,
     addIngredient,
+    removeIngredient,
     resetSoup,
     checkSoup,
     nextOrder,
     clearFeedback,
     toggleRecipeModal,
+    goToVegetableStep,
     goToStockStep,
     pinRecipe,
     canSubmit,

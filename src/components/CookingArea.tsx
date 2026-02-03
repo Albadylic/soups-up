@@ -5,7 +5,7 @@ interface CookingAreaProps {
   addedFat: string | null;
   addedVegetables: string[];
   addedStock: string | null;
-  currentStep: "fat" | "vegetable" | "stock" | "ready";
+  currentStep: "fat" | "vegetable" | "stock";
   canSubmit: boolean;
   onSubmit: () => void;
   onReset: () => void;

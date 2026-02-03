@@ -5,8 +5,9 @@ interface SidebarProps {
   addedFat: string | null;
   addedVegetables: string[];
   addedStock: string | null;
-  currentStep: 'fat' | 'vegetable' | 'stock' | 'ready';
+  currentStep: 'fat' | 'vegetable' | 'stock';
   onAddIngredient: (type: IngredientType, id: string) => void;
+  onRemoveIngredient: (type: IngredientType, id: string) => void;
   onReset: () => void;
   onToggleRecipeModal: () => void;
 }
@@ -19,11 +20,20 @@ export function Sidebar({
   addedStock,
   currentStep,
   onAddIngredient,
+  onRemoveIngredient,
   onReset,
   onToggleRecipeModal,
 }: SidebarProps) {
+  const handleIngredientClick = (type: IngredientType, id: string, isSelected: boolean) => {
+    if (isSelected) {
+      onRemoveIngredient(type, id);
+    } else {
+      onAddIngredient(type, id);
+    }
+  };
+
   const isFatDisabled = currentStep !== 'fat';
-  const isVegetableDisabled = currentStep === 'fat' || currentStep === 'ready' || addedStock !== null;
+  const isVegetableDisabled = currentStep === 'fat' || addedStock !== null;
   const isStockDisabled = currentStep === 'fat' || addedVegetables.length === 0;
 
   return (
@@ -36,48 +46,57 @@ export function Sidebar({
       <div class="sidebar-section">
         <h3>Fats</h3>
         <div class="ingredient-list">
-          {ingredients.fats.map(fat => (
-            <button
-              key={fat.id}
-              class={`ingredient-btn ${addedFat === fat.id ? 'selected' : ''} ${isFatDisabled ? 'disabled' : ''}`}
-              onClick={() => onAddIngredient('fat', fat.id)}
-              disabled={isFatDisabled}
-            >
-              {fat.emoji} {fat.name}
-            </button>
-          ))}
+          {ingredients.fats.map(fat => {
+            const isSelected = addedFat === fat.id;
+            return (
+              <button
+                key={fat.id}
+                class={`ingredient-btn ${isSelected ? 'selected' : ''} ${isFatDisabled && !isSelected ? 'disabled' : ''}`}
+                onClick={() => handleIngredientClick('fat', fat.id, isSelected)}
+                disabled={isFatDisabled && !isSelected}
+              >
+                {fat.emoji} {fat.name}
+              </button>
+            );
+          })}
         </div>
       </div>
 
       <div class="sidebar-section">
         <h3>Vegetables</h3>
         <div class="ingredient-list">
-          {ingredients.vegetables.map(veg => (
-            <button
-              key={veg.id}
-              class={`ingredient-btn ${addedVegetables.includes(veg.id) ? 'selected' : ''} ${isVegetableDisabled ? 'disabled' : ''}`}
-              onClick={() => onAddIngredient('vegetable', veg.id)}
-              disabled={isVegetableDisabled || addedVegetables.includes(veg.id)}
-            >
-              {veg.emoji} {veg.name}
-            </button>
-          ))}
+          {ingredients.vegetables.map(veg => {
+            const isSelected = addedVegetables.includes(veg.id);
+            return (
+              <button
+                key={veg.id}
+                class={`ingredient-btn ${isSelected ? 'selected' : ''} ${isVegetableDisabled && !isSelected ? 'disabled' : ''}`}
+                onClick={() => handleIngredientClick('vegetable', veg.id, isSelected)}
+                disabled={isVegetableDisabled && !isSelected}
+              >
+                {veg.emoji} {veg.name}
+              </button>
+            );
+          })}
         </div>
       </div>
 
       <div class="sidebar-section">
         <h3>Stocks</h3>
         <div class="ingredient-list">
-          {ingredients.stocks.map(stock => (
-            <button
-              key={stock.id}
-              class={`ingredient-btn ${addedStock === stock.id ? 'selected' : ''} ${isStockDisabled ? 'disabled' : ''}`}
-              onClick={() => onAddIngredient('stock', stock.id)}
-              disabled={isStockDisabled || addedStock !== null}
-            >
-              {stock.emoji} {stock.name}
-            </button>
-          ))}
+          {ingredients.stocks.map(stock => {
+            const isSelected = addedStock === stock.id;
+            return (
+              <button
+                key={stock.id}
+                class={`ingredient-btn ${isSelected ? 'selected' : ''} ${isStockDisabled && !isSelected ? 'disabled' : ''}`}
+                onClick={() => handleIngredientClick('stock', stock.id, isSelected)}
+                disabled={isStockDisabled && !isSelected}
+              >
+                {stock.emoji} {stock.name}
+              </button>
+            );
+          })}
         </div>
       </div>
 
