@@ -812,3 +812,39 @@
 .next-step-btn .arrow {
   font-size: 1.25rem;
 }
+
+.step-nav-buttons {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  justify-content: center;
+}
+
+.step-nav-buttons .next-step-btn {
+  margin: 0;
+}
+
+.back-step-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--text-secondary);
+}
+
+.back-step-btn:hover {
+  background-color: var(--surface-hover);
+  border-color: var(--border-hover);
+}
+
+.back-step-btn .arrow {
+  font-size: 1.25rem;
+}

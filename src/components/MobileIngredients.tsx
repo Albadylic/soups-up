@@ -10,6 +10,8 @@ interface MobileIngredientsProps {
   onRemoveIngredient: (type: IngredientType, id: string) => void;
   onGoToVegetables: () => void;
   onGoToStock: () => void;
+  onGoBackToFat: () => void;
+  onGoBackToVegetables: () => void;
   onSubmit: () => void;
   unlockedIngredients: {
     fats: string[];
@@ -29,6 +31,8 @@ export function MobileIngredients({
   onRemoveIngredient,
   onGoToVegetables,
   onGoToStock,
+  onGoBackToFat,
+  onGoBackToVegetables,
   onSubmit,
   unlockedIngredients,
 }: MobileIngredientsProps) {
@@ -90,13 +94,18 @@ export function MobileIngredients({
           );
         })}
       </div>
-      <button
-        class="next-step-btn"
-        onClick={onGoToStock}
-        disabled={addedVegetables.length === 0}
-      >
-        Next <span class="arrow">→</span>
-      </button>
+      <div class="step-nav-buttons">
+        <button class="back-step-btn" onClick={onGoBackToFat}>
+          <span class="arrow">←</span> Back
+        </button>
+        <button
+          class="next-step-btn"
+          onClick={onGoToStock}
+          disabled={addedVegetables.length === 0}
+        >
+          Next <span class="arrow">→</span>
+        </button>
+      </div>
     </div>
   );
 
@@ -118,13 +127,18 @@ export function MobileIngredients({
           );
         })}
       </div>
-      <button
-        class="next-step-btn serve-btn"
-        onClick={onSubmit}
-        disabled={!addedStock}
-      >
-        Serve
-      </button>
+      <div class="step-nav-buttons">
+        <button class="back-step-btn" onClick={onGoBackToVegetables}>
+          <span class="arrow">←</span> Back
+        </button>
+        <button
+          class="next-step-btn serve-btn"
+          onClick={onSubmit}
+          disabled={!addedStock}
+        >
+          Serve
+        </button>
+      </div>
     </div>
   );
 

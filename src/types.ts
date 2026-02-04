@@ -16,7 +16,6 @@ export interface Recipe {
   fat: string;
   vegetables: string[];
   stock: string;
-  level: number;
   xp: number;
 }
 

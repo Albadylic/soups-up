@@ -5,7 +5,14 @@
     "fat": "vegan-butter",
     "vegetables": ["onions"],
     "stock": "vegetable",
-    "level": 1,
+    "xp": 10
+  },
+  {
+    "id": "creamy-carrot",
+    "name": "Creamy Carrot Soup",
+    "fat": "vegan-butter",
+    "vegetables": ["carrots"],
+    "stock": "vegetable",
     "xp": 10
   },
   {
@@ -14,7 +21,6 @@
     "fat": "vegan-butter",
     "vegetables": ["garlic", "potato"],
     "stock": "vegetable",
-    "level": 2,
     "xp": 20
   },
   {
@@ -23,7 +29,6 @@
     "fat": "vegan-butter",
     "vegetables": ["carrots", "potato"],
     "stock": "vegetable",
-    "level": 2,
     "xp": 20
   },
   {
@@ -32,8 +37,7 @@
     "fat": "oil",
     "vegetables": ["carrots", "onions"],
     "stock": "vegetable",
-    "level": 3,
-    "xp": 30
+    "xp": 20
   },
   {
     "id": "cream-of-mushroom",
@@ -41,8 +45,7 @@
     "fat": "vegan-butter",
     "vegetables": ["onions", "mushrooms"],
     "stock": "mushroom",
-    "level": 3,
-    "xp": 35
+    "xp": 20
   },
   {
     "id": "wild-mushroom",
@@ -50,8 +53,7 @@
     "fat": "vegan-butter",
     "vegetables": ["mushrooms", "garlic"],
     "stock": "mushroom",
-    "level": 3,
-    "xp": 35
+    "xp": 20
   },
   {
     "id": "garden-vegetable",
@@ -59,8 +61,7 @@
     "fat": "oil",
     "vegetables": ["onions", "carrots", "garlic"],
     "stock": "vegetable",
-    "level": 4,
-    "xp": 40
+    "xp": 30
   },
   {
     "id": "tomato-carrot",
@@ -68,8 +69,7 @@
     "fat": "vegan-butter",
     "vegetables": ["tomato", "carrots"],
     "stock": "vegetable",
-    "level": 4,
-    "xp": 40
+    "xp": 30
   },
   {
     "id": "creamy-potato-garlic",
@@ -77,8 +77,7 @@
     "fat": "vegan-butter",
     "vegetables": ["potato", "garlic", "onions"],
     "stock": "vegetable",
-    "level": 4,
-    "xp": 45
+    "xp": 30
   },
   {
     "id": "minestrone",
@@ -86,7 +85,6 @@
     "fat": "oil",
     "vegetables": ["onions", "carrots", "cabbage"],
     "stock": "vegetable",
-    "level": 4,
     "xp": 50
   },
   {
@@ -95,7 +93,6 @@
     "fat": "oil",
     "vegetables": ["cabbage", "onions", "carrots"],
     "stock": "vegetable",
-    "level": 4,
     "xp": 50
   },
   {
@@ -104,8 +101,7 @@
     "fat": "vegan-butter",
     "vegetables": ["mushrooms", "potato", "onions"],
     "stock": "mushroom",
-    "level": 4,
-    "xp": 50
+    "xp": 30
   },
   {
     "id": "seaweed-onion",
@@ -113,8 +109,7 @@
     "fat": "oil",
     "vegetables": ["onions"],
     "stock": "seaweed",
-    "level": 5,
-    "xp": 60
+    "xp": 30
   },
   {
     "id": "miso-mushroom",
@@ -122,8 +117,7 @@
     "fat": "oil",
     "vegetables": ["mushrooms", "cabbage"],
     "stock": "seaweed",
-    "level": 5,
-    "xp": 60
+    "xp": 40
   },
   {
     "id": "tom-yum",
@@ -131,7 +125,6 @@
     "fat": "oil",
     "vegetables": ["tomato", "mushrooms", "garlic"],
     "stock": "seaweed",
-    "level": 5,
-    "xp": 65
+    "xp": 70
   }
 ]

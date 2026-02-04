@@ -119,7 +119,23 @@ export function useGameState() {
     }));
   }, []);
 
+  const goBackToFatStep = useCallback(() => {
+    setState(prev => ({
+      ...prev,
+      readyForVegetables: false,
+    }));
+  }, []);
+
+  const goBackToVegetableStep = useCallback(() => {
+    setState(prev => ({
+      ...prev,
+      readyForStock: false,
+    }));
+  }, []);
+
   const checkSoup = useCallback(() => {
+    let xpToAward: number | null = null;
+
     setState(prev => {
       if (!prev.currentOrder || !prev.addedFat || !prev.addedStock) {
         return { ...prev, feedback: 'failure' };
@@ -146,11 +162,16 @@ export function useGameState() {
         return { ...prev, feedback: 'failure' };
       }
 
-      // Award XP for successful recipe
-      awardXP(order.xp);
+      // Store XP to award outside setState
+      xpToAward = order.xp;
 
       return { ...prev, feedback: 'success', pinnedRecipeId: null };
     });
+
+    // Award XP outside setState to avoid side effects during React retries
+    if (xpToAward !== null) {
+      awardXP(xpToAward);
+    }
   }, [awardXP]);
 
   const nextOrder = useCallback(() => {
@@ -212,6 +233,8 @@ export function useGameState() {
     toggleRecipeModal,
     goToVegetableStep,
     goToStockStep,
+    goBackToFatStep,
+    goBackToVegetableStep,
     pinRecipe,
     canSubmit,
     currentStep: currentStep(),

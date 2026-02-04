@@ -25,6 +25,8 @@ export function Game() {
     toggleRecipeModal,
     goToVegetableStep,
     goToStockStep,
+    goBackToFatStep,
+    goBackToVegetableStep,
     pinRecipe,
     canSubmit,
     currentStep,
@@ -80,6 +82,8 @@ export function Game() {
         onRemoveIngredient={removeIngredient}
         onGoToVegetables={goToVegetableStep}
         onGoToStock={goToStockStep}
+        onGoBackToFat={goBackToFatStep}
+        onGoBackToVegetables={goBackToVegetableStep}
         onSubmit={checkSoup}
         unlockedIngredients={unlockedIngredients}
       />

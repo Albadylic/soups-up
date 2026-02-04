@@ -10,9 +10,13 @@ function loadProgress(): PlayerProgress {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
       const parsed = JSON.parse(stored);
+      // Validate data structure
+      if (typeof parsed.level !== 'number' || typeof parsed.xp !== 'number') {
+        return { level: 1, xp: 0 };
+      }
       return {
-        level: parsed.level ?? 1,
-        xp: parsed.xp ?? 0,
+        level: parsed.level,
+        xp: parsed.xp,
       };
     }
   } catch {
