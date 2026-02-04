@@ -11,6 +11,11 @@ interface MobileIngredientsProps {
   onGoToVegetables: () => void;
   onGoToStock: () => void;
   onSubmit: () => void;
+  unlockedIngredients: {
+    fats: string[];
+    vegetables: string[];
+    stocks: string[];
+  };
 }
 
 const ingredients = ingredientsData as Ingredients;
@@ -25,7 +30,12 @@ export function MobileIngredients({
   onGoToVegetables,
   onGoToStock,
   onSubmit,
+  unlockedIngredients,
 }: MobileIngredientsProps) {
+  // Filter ingredients to only show unlocked ones
+  const unlockedFats = ingredients.fats.filter(f => unlockedIngredients.fats.includes(f.id));
+  const unlockedVegetables = ingredients.vegetables.filter(v => unlockedIngredients.vegetables.includes(v.id));
+  const unlockedStocks = ingredients.stocks.filter(s => unlockedIngredients.stocks.includes(s.id));
   const handleIngredientClick = (type: IngredientType, id: string, isSelected: boolean) => {
     if (isSelected) {
       onRemoveIngredient(type, id);
@@ -37,7 +47,7 @@ export function MobileIngredients({
     <div class="mobile-ingredient-section">
       <h3>Choose a Fat</h3>
       <div class="mobile-ingredient-grid">
-        {ingredients.fats.map((fat) => {
+        {unlockedFats.map((fat) => {
           const isSelected = addedFat === fat.id;
           return (
             <button
@@ -65,7 +75,7 @@ export function MobileIngredients({
     <div class="mobile-ingredient-section">
       <h3>Add Vegetables (up to 3)</h3>
       <div class="mobile-ingredient-grid">
-        {ingredients.vegetables.map((veg) => {
+        {unlockedVegetables.map((veg) => {
           const isSelected = addedVegetables.includes(veg.id);
           return (
             <button
@@ -94,7 +104,7 @@ export function MobileIngredients({
     <div class="mobile-ingredient-section">
       <h3>Choose a Stock</h3>
       <div class="mobile-ingredient-grid">
-        {ingredients.stocks.map((stock) => {
+        {unlockedStocks.map((stock) => {
           const isSelected = addedStock === stock.id;
           return (
             <button

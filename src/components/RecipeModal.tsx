@@ -1,11 +1,11 @@
 import type { Recipe, Ingredients } from '../types';
-import recipes from '../data/recipes.json';
 import ingredientsData from '../data/ingredients.json';
 
 interface RecipeModalProps {
   onClose: () => void;
   pinnedRecipeId: string | null;
   onPinRecipe: (recipeId: string) => void;
+  availableRecipes: Recipe[];
 }
 
 const ingredients = ingredientsData as Ingredients;
@@ -15,7 +15,7 @@ const getIngredientDisplay = (id: string, category: 'fats' | 'vegetables' | 'sto
   return item ? `${item.emoji} ${item.name}` : id;
 };
 
-export function RecipeModal({ onClose, pinnedRecipeId, onPinRecipe }: RecipeModalProps) {
+export function RecipeModal({ onClose, pinnedRecipeId, onPinRecipe, availableRecipes }: RecipeModalProps) {
   return (
     <div class="modal-overlay" onClick={onClose}>
       <div class="modal" onClick={e => e.stopPropagation()}>
@@ -24,7 +24,7 @@ export function RecipeModal({ onClose, pinnedRecipeId, onPinRecipe }: RecipeModa
           <button class="close-btn" onClick={onClose}>×</button>
         </div>
         <div class="recipe-list">
-          {(recipes as Recipe[]).map(recipe => (
+          {availableRecipes.map(recipe => (
             <div key={recipe.id} class={`recipe-item ${pinnedRecipeId === recipe.id ? 'pinned' : ''}`}>
               <div class="recipe-header">
                 <h3>{recipe.name}</h3>

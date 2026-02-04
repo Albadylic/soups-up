@@ -4,6 +4,8 @@ import { RecipeModal } from "./RecipeModal";
 import { CookingArea } from "./CookingArea";
 import { MobileIngredients } from "./MobileIngredients";
 import { FeedbackMessage } from "./FeedbackMessage";
+import { PlayerLevel } from "./PlayerLevel";
+import { LevelUpModal } from "./LevelUpModal";
 
 export function Game() {
   const {
@@ -26,7 +28,18 @@ export function Game() {
     pinRecipe,
     canSubmit,
     currentStep,
+    playerProgress,
   } = useGameState();
+
+  const {
+    level,
+    xp,
+    pendingLevelUp,
+    clearLevelUp,
+    unlockedIngredients,
+    availableRecipes,
+    getNewlyUnlockedRecipes,
+  } = playerProgress;
 
   return (
     <div class="game-container">
@@ -39,6 +52,7 @@ export function Game() {
           📖
         </button>
         <OrderDisplay order={currentOrder} pinnedRecipeId={pinnedRecipeId} />
+        <PlayerLevel level={level} xp={xp} />
       </header>
 
       <div class="mobile-pot-area">
@@ -67,6 +81,7 @@ export function Game() {
         onGoToVegetables={goToVegetableStep}
         onGoToStock={goToStockStep}
         onSubmit={checkSoup}
+        unlockedIngredients={unlockedIngredients}
       />
 
       {showRecipeModal && (
@@ -74,6 +89,7 @@ export function Game() {
           onClose={toggleRecipeModal}
           pinnedRecipeId={pinnedRecipeId}
           onPinRecipe={pinRecipe}
+          availableRecipes={availableRecipes}
         />
       )}
 
@@ -82,6 +98,14 @@ export function Game() {
           type={feedback}
           onDismiss={clearFeedback}
           onNextOrder={nextOrder}
+        />
+      )}
+
+      {pendingLevelUp && !feedback && (
+        <LevelUpModal
+          level={pendingLevelUp}
+          newRecipes={getNewlyUnlockedRecipes()}
+          onClose={clearLevelUp}
         />
       )}
     </div>
