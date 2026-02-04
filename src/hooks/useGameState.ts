@@ -1,13 +1,17 @@
 import { useState, useCallback, useEffect } from 'preact/hooks';
 import type { GameState, Recipe, IngredientType } from '../types';
-import recipes from '../data/recipes.json';
-
-const getRandomRecipe = (): Recipe => {
-  const index = Math.floor(Math.random() * recipes.length);
-  return recipes[index];
-};
+import { usePlayerProgress } from './usePlayerProgress';
 
 export function useGameState() {
+  const playerProgress = usePlayerProgress();
+  const { availableRecipes, awardXP } = playerProgress;
+
+  const getRandomRecipe = useCallback((): Recipe | null => {
+    if (availableRecipes.length === 0) return null;
+    const index = Math.floor(Math.random() * availableRecipes.length);
+    return availableRecipes[index];
+  }, [availableRecipes]);
+
   const [state, setState] = useState<GameState>({
     currentOrder: null,
     addedFat: null,
@@ -20,13 +24,15 @@ export function useGameState() {
     pinnedRecipeId: null,
   });
 
-  // Initialize with a random order
+  // Initialize with a random order from available recipes
   useEffect(() => {
-    setState(prev => ({
-      ...prev,
-      currentOrder: getRandomRecipe(),
-    }));
-  }, []);
+    if (state.currentOrder === null && availableRecipes.length > 0) {
+      setState(prev => ({
+        ...prev,
+        currentOrder: getRandomRecipe(),
+      }));
+    }
+  }, [availableRecipes, state.currentOrder, getRandomRecipe]);
 
   const addIngredient = useCallback((type: IngredientType, id: string) => {
     setState(prev => {
@@ -113,7 +119,23 @@ export function useGameState() {
     }));
   }, []);
 
+  const goBackToFatStep = useCallback(() => {
+    setState(prev => ({
+      ...prev,
+      readyForVegetables: false,
+    }));
+  }, []);
+
+  const goBackToVegetableStep = useCallback(() => {
+    setState(prev => ({
+      ...prev,
+      readyForStock: false,
+    }));
+  }, []);
+
   const checkSoup = useCallback(() => {
+    let xpToAward: number | null = null;
+
     setState(prev => {
       if (!prev.currentOrder || !prev.addedFat || !prev.addedStock) {
         return { ...prev, feedback: 'failure' };
@@ -140,9 +162,17 @@ export function useGameState() {
         return { ...prev, feedback: 'failure' };
       }
 
+      // Store XP to award outside setState
+      xpToAward = order.xp;
+
       return { ...prev, feedback: 'success', pinnedRecipeId: null };
     });
-  }, []);
+
+    // Award XP outside setState to avoid side effects during React retries
+    if (xpToAward !== null) {
+      awardXP(xpToAward);
+    }
+  }, [awardXP]);
 
   const nextOrder = useCallback(() => {
     setState(prev => ({
@@ -155,7 +185,7 @@ export function useGameState() {
       readyForVegetables: false,
       readyForStock: false,
     }));
-  }, []);
+  }, [getRandomRecipe]);
 
   const clearFeedback = useCallback(() => {
     setState(prev => ({
@@ -203,8 +233,11 @@ export function useGameState() {
     toggleRecipeModal,
     goToVegetableStep,
     goToStockStep,
+    goBackToFatStep,
+    goBackToVegetableStep,
     pinRecipe,
     canSubmit,
     currentStep: currentStep(),
+    playerProgress,
   };
 }

@@ -31,7 +31,9 @@ body {
   min-height: 100vh;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   margin: 0;
   color: var(--text-primary);
 }
@@ -61,4 +63,125 @@ button:active {
 button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+/* Player Level Display */
+.player-level {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 4px 8px;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  border: 2px solid var(--accent-brown);
+}
+
+.level-badge {
+  font-weight: 700;
+  font-size: 0.9em;
+  color: var(--accent-brown);
+  white-space: nowrap;
+}
+
+.xp-bar-container {
+  width: 60px;
+  height: 8px;
+  background: var(--bg-primary);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--accent-brown);
+}
+
+.xp-bar {
+  height: 100%;
+  background: var(--accent-yellow);
+  transition: width 0.3s ease;
+}
+
+.xp-text {
+  font-size: 0.75em;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* Level Up Modal */
+.level-up-modal {
+  background: var(--bg-primary);
+  border: 3px solid var(--accent-yellow);
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 320px;
+  width: 90%;
+  text-align: center;
+  animation: levelUpPop 0.4s ease;
+}
+
+@keyframes levelUpPop {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.level-up-header {
+  margin-bottom: 16px;
+}
+
+.level-up-header h2 {
+  font-size: 1.8em;
+  color: var(--accent-yellow);
+  margin-bottom: 8px;
+}
+
+.level-up-badge {
+  display: inline-block;
+  background: var(--accent-yellow);
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 1.2em;
+  padding: 8px 20px;
+  border-radius: 20px;
+}
+
+.new-recipes {
+  margin: 20px 0;
+  text-align: left;
+}
+
+.new-recipes h3 {
+  font-size: 1em;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.new-recipes ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.new-recipes li {
+  padding: 6px 0;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--bg-secondary);
+}
+
+.new-recipes li:last-child {
+  border-bottom: none;
+}
+
+.level-up-continue {
+  margin-top: 16px;
+  background: var(--accent-yellow);
+  border-color: var(--accent-brown);
+  font-weight: 600;
+  width: 100%;
 }

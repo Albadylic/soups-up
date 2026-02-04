@@ -16,6 +16,12 @@ export interface Recipe {
   fat: string;
   vegetables: string[];
   stock: string;
+  xp: number;
+}
+
+export interface PlayerProgress {
+  level: number;
+  xp: number;
 }
 
 export interface GameState {
