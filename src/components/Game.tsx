@@ -53,8 +53,10 @@ export function Game() {
         >
           📖
         </button>
-        <OrderDisplay order={currentOrder} pinnedRecipeId={pinnedRecipeId} />
-        <PlayerLevel level={level} xp={xp} />
+        <div class="order-level-container">
+          <OrderDisplay order={currentOrder} pinnedRecipeId={pinnedRecipeId} />
+          <PlayerLevel level={level} xp={xp} />
+        </div>
       </header>
 
       <div class="mobile-pot-area">

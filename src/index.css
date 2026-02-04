@@ -31,7 +31,9 @@ body {
   min-height: 100vh;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   margin: 0;
   color: var(--text-primary);
 }
@@ -67,6 +69,7 @@ button:disabled {
 .player-level {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 4px 8px;
   background: var(--bg-secondary);
